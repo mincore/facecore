@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+package core;
+
+message FaceAttr {
+    optional bytes Feature = 1;
+    repeated uint32 TagIDs = 2;
+}
+
+message TagAttr {
+    optional uint32 TagID = 1;
+    optional uint32 Flags = 2;
+}
