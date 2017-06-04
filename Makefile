@@ -17,6 +17,8 @@ TEST=$(BINDIR)/test
 CXXFLAGS=-g -Wall -Werror -std=c++11
 CXXFLAGS+=-I$(DEPINCDIR) -Isrc
 
+$(shell mkdir -p bin test; cd ./src/msg/pb; ./gen.sh;)
+
 OBJS=$(patsubst %.cpp,%.o,$(shell find src -name *.cpp))
 TEST_OBJS=$(patsubst %.cpp,%.o,$(shell find test -name *.cpp))
 TEST_OBJS+=$(patsubst %main.o,,$(OBJS))
@@ -30,8 +32,6 @@ DEPS=\
 
 #LDFLAGS+=-Wl,-Bsymbolic,-rpath=$(BINDIR)
 LDFLAGS+=$(DEPS)
-
-$(shell cd ./src/msg/pb; ./gen.sh;)
 
 all:$(TARGET)
 
