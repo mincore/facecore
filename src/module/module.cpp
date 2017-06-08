@@ -6,8 +6,6 @@
  * =====================================================================
  */
 #include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include <unistd.h>
 #include <string.h>
 #include "common/common.h"
@@ -27,13 +25,7 @@ Module* gModules[] =
 
 static void ProcessEvents()
 {
-    char *line;
-    while (1) {
-        line = readline("DEBUG> ");
-        if (!run_test(line))
-            break;
-        free(line);
-    }
+    run_tests();
 }
 
 int RunAllModule()

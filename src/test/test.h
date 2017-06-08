@@ -9,6 +9,6 @@
 #ifndef _TEST_H
 #define _TEST_H
 
-bool run_test(const char *line);
+void run_tests();
 
 #endif

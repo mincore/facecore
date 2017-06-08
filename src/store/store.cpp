@@ -104,7 +104,7 @@ bool Store::LoadFaces(const std::unordered_map<TagID, Tag> &tagIdMap)
             }
             LOG_DEBUG("push FaceID:%lld to tag:%s", (long long)faeID,
                     it->second->m_name.c_str());
-            it->second->m_faceIDs.push_back(faceID);
+            it->second->m_faceIDs.push_back(&faceAttr);
         }
     }
 
@@ -148,16 +148,16 @@ void Store::AddFaces(const std::string &tagName, const ExtractResults &results)
         const Feature &feat = r.feat;
         FaceID faceID = m_nextFaceID++;
 
-        {
-            std::unique_lock<std::mutex> lk(tag->m_mutex);
-            tag->m_faceIDs.push_back(faceID);
-        }
-
         FaceAttr *faceAttr;
         {
             std::unique_lock<std::mutex> lk(m_faceMapMutex);
             m_faceMap[faceID] = FaceAttr();
             faceAttr = &m_faceMap[faceID];
+        }
+
+        {
+            std::unique_lock<std::mutex> lk(tag->m_mutex);
+            tag->m_faceIDs.push_back(faceAttr);
         }
 
         faceAttr->add_tagids(tag->m_attr.tagid());
@@ -184,16 +184,9 @@ void Store::ListTags(std::vector<std::string> &tagNames)
     }
 }
 
-void Store::ListFaces(const std::string &tagName, std::list<FaceID> &faceIDs)
+size_t Store::GetTagFaceCount(const std::string &tagName)
 {
     std::unique_lock<std::mutex> lk(m_tagMapMutex);
-    auto &tag = m_tagMap[tagName];
-    if (tag.get()) {
-        faceIDs = tag->m_faceIDs;
-    }
-}
-
-void Store::SearchTag(FaceID faceID, const std::string &tagName)
-{
-
+    Tag tag = m_tagMap[tagName];
+    return tag->m_faceIDs.size();
 }

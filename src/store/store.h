@@ -1,12 +1,12 @@
 /* =====================================================================
  * Copyright (C) 2017 mincore All Right Reserved.
  *      Author: mincore@163.com
- *    Filename: cache.h
+ *    Filename: store.h
  * Description:
  * =====================================================================
  */
-#ifndef _CACHE_H
-#define _CACHE_H
+#ifndef _STORE_H
+#define _STORE_H
 
 #include <mutex>
 #include <atomic>
@@ -28,7 +28,7 @@ struct _Tag {
     std::string m_name;
     TagAttr m_attr;
     std::mutex m_mutex;
-    std::list<FaceID> m_faceIDs;
+    std::list<FaceAttr*> m_faceIDs;
 };
 typedef std::shared_ptr<_Tag> Tag;
 
@@ -39,10 +39,7 @@ public:
 
     void AddFaces(const std::string &tagName, const ExtractResults &results);
     void ListTags(std::vector<std::string> &tagNames);
-    void SearchTag(FaceID faceID, const std::string &tagName);
-
-    // just for test
-    void ListFaces(const std::string &tagName, std::list<FaceID> &faceIDs);
+    size_t GetTagFaceCount(const std::string &tagName);
 
 private:
     bool LoadTags(std::unordered_map<TagID, Tag> &tagIdMap);
@@ -53,15 +50,11 @@ private:
     std::atomic<FaceID> m_nextFaceID;
     std::atomic<TagID> m_nextTagID;
 
-    // TODO: change FaceAttr to FaceAttr* or FaceAttrID
     std::unordered_map<FaceID, FaceAttr> m_faceMap;
     std::mutex m_faceMapMutex;
 
     std::unordered_map<std::string, Tag> m_tagMap;
     std::mutex m_tagMapMutex;
-
-    std::unordered_map<TagID, Tag> m_tagIdMap;
-    std::mutex m_tagIdMapMutex;
 };
 
 #endif

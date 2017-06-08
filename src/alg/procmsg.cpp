@@ -64,10 +64,8 @@ public:
 
 void MsgDetectReq::Run()
 {
-    for (auto &file : imgFiles) {
-        DetectTask *task = new DetectTask(file.c_str());
-        Alg::Instance()->Push(task);
-    }
+    DetectTask *task = new DetectTask(imgFile.c_str());
+    Alg::Instance()->Push(task);
 }
 
 void MsgAddImgReq::Run()

@@ -24,17 +24,6 @@ static bool Exit()
 
 MODULE(STORE, Init, Exit);
 
-void MsgStoreAddFaces::Run()
+void MsgSearchReq::Run()
 {
-    //Store::Instance()->AddFaces();
-}
-
-void MsgStoreListTags::Run()
-{
-    //Store::Instance()->ListTags();
-}
-
-void MsgSearchTagReq::Run()
-{
-    Store::Instance()->SearchTag(faceID, tagName);
 }

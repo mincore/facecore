@@ -14,41 +14,39 @@
 #include <vector>
 #include <string>
 
-class Msg: public Task {
-public:
+struct Msg: public Task {
     int sess;
 };
 
 struct MsgDetectReq: public Msg {
     void Run();
 
-    std::vector<std::string> imgFiles;
+    std::string imgFile;
 };
 
 struct MsgDetectResp: public Msg {
     void Run();
 
     struct result {
-        std::string imgFile;
         int x,y,w,h;
     };
     std::vector<result> results;
 };
 
-struct MsgSearchTagReq: public Msg {
+struct MsgSearchReq: public Msg {
     void Run();
 
-    FaceID faceID;
-    std::string tagName;
+    std::string imgFile;
+    std::vector<std::string> tagNames;
 };
 
-struct MsgSearchTagResp: public Msg {
+struct MsgSearchResp: public Msg {
     void Run();
 
-    FaceID srcFaceID;
     struct result {
         FaceID matchFaceID;
         float score;
+        std::string tagName;
     };
     std::vector<result> results;
 };
@@ -63,19 +61,17 @@ struct MsgAddImgReq: public Msg {
 struct MsgAddImgResp: public Msg {
     void Run();
 
-    bool success;
+    int validImgs;
 };
 
-class MsgStoreAddFaces: public Msg {
-public:
+struct MsgListTagsReq: public Msg {
     void Run();
-    std::string tagName;
-    const ExtractResults results;
 };
 
-class MsgStoreListTags: public Msg {
-public:
+struct MsgListTagsResp: public Msg {
     void Run();
+
+    std::vector<std::string> tagNames;
 };
 
 #endif

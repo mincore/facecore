@@ -52,6 +52,8 @@ static void inline strsplit(const char *s, char delim, std::vector<std::string> 
 {
     std::stringstream ss(s);
     std::string item;
+    elems.clear();
+
     while (getline(ss, item, delim))
     {
         elems.push_back(strtrim(item, " \t"));

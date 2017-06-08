@@ -17,7 +17,7 @@ TEST=$(BINDIR)/test
 CXXFLAGS=-g -Wall -Werror -std=c++11
 CXXFLAGS+=-I$(DEPINCDIR) -Isrc
 
-$(shell mkdir -p bin test; cd ./src/msg/pb; ./gen.sh;)
+#$(shell mkdir -p bin test; cd ./src/msg/pb; ./gen.sh;)
 
 OBJS=$(patsubst %.cpp,%.o,$(shell find src -name *.cpp))
 TEST_OBJS=$(patsubst %.cpp,%.o,$(shell find test -name *.cpp))
@@ -47,4 +47,4 @@ $(TEST): $(TEST_OBJS)
 .PHONY : clean
 
 clean:
-	@rm $(OBJS) $(TARGET) $(TEST) $(TEST_OBJS) -f
+	@rm -f $(OBJS) $(TARGET) $(TEST) $(TEST_OBJS)
