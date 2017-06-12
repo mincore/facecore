@@ -8,9 +8,9 @@
  */
 #include "common/common.h"
 #include "module/module.h"
-#include "msg/msg.h"
 #include "alg.h"
 #include "store/store.h"
+#include "msg/msg.h"
 
 static bool Init()
 {
@@ -64,14 +64,8 @@ public:
 
 void MsgDetectReq::Run()
 {
-    DetectTask *task = new DetectTask(imgFile.c_str());
-    Alg::Instance()->Push(task);
 }
 
-void MsgAddImgReq::Run()
+void MsgCheckinReq::Run()
 {
-    for (auto &file : imgFiles) {
-        ExtractTask *task = new ExtractTask(tagName.c_str(), file.c_str());
-        Alg::Instance()->Push(task);
-    }
 }

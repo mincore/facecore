@@ -8,16 +8,16 @@
  */
 #include "common/common.h"
 #include "module/module.h"
-#include "msg/msg.h"
+#include "server.h"
 
 static bool Init()
 {
-    return true;
+    return ServerStart() == 0;
 }
 
 static bool Exit()
 {
-    return true;
+    return ServerStop() == 0;
 }
 
 MODULE(GATE, Init, Exit);

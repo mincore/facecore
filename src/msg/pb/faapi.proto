@@ -1,0 +1,51 @@
+syntax = "proto2";
+
+package faapi;
+
+message ImgBuf {
+    optional bytes data = 1;
+}
+
+message DetectReq {
+    optional uint32 id = 1;
+    optional ImgBuf imgBuf = 2;
+}
+
+message Rect {
+    optional uint32 left = 1;
+    optional uint32 top = 2;
+    optional uint32 right = 3;
+    optional uint32 bottom = 4;
+}
+
+message DetectResp {
+    optional uint32 id = 1;
+    repeated Rect faceRects = 2;
+}
+
+message CheckinReq {
+    optional uint32 id = 1;
+    optional ImgBuf imgBuf = 2;
+}
+
+message CheckinResp {
+    optional uint32 id = 1;
+    repeated uint32 faceID = 2;
+}
+
+message SearchReq {
+    optional uint32 id = 1;
+    optional ImgBuf imgBuf = 2;
+    repeated string tagNames = 3;
+}
+
+message SearchResult {
+    optional uint32 faceID = 1;
+    optional double score = 2;
+    optional string tagName = 3;
+}
+
+message SearchResp {
+    optional uint32 id = 1;
+    repeated SearchResult results = 2;
+}

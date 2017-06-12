@@ -21,12 +21,6 @@ struct Feature {
     int size;
 };
 
-struct ImgBuffer {
-    std::uint8_t *data;
-    std::uint32_t width;
-    std::uint32_t height;
-};
-
 struct Rect {
     std::uint32_t left;
     std::uint32_t top;

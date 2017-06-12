@@ -54,12 +54,4 @@ private:
     std::string m_trainedFile;
 };
 
-int AlgCreate();
-int AlgDestroy();
-
-int AlgDetect();
-int AlgExtract();
-float AlgCompare();
-
-
 #endif

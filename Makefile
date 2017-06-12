@@ -6,7 +6,7 @@
 # * Description: 
 # * ===================================================
 # */
-CC=@echo -e "cc \033[32m$@\033[0m";g++
+CXX=@echo -e "cc \033[32m$@\033[0m";g++
 
 DEPLIBDIR=dep/lib
 DEPINCDIR=dep/include
@@ -14,7 +14,7 @@ BINDIR=bin
 TARGET=$(BINDIR)/core
 TEST=$(BINDIR)/test
 
-CXXFLAGS=-g -Wall -Werror -std=c++11
+CXXFLAGS=-g -Wall -Werror
 CXXFLAGS+=-I$(DEPINCDIR) -Isrc
 
 #$(shell mkdir -p bin test; cd ./src/msg/pb; ./gen.sh;)
@@ -36,13 +36,13 @@ LDFLAGS+=$(DEPS)
 all:$(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $^ -o $@ $(LDFLAGS)
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
 $(TEST): $(TEST_OBJS) 
-	$(CC) $^ $(LDFLAGS) $(DEPLIBDIR)/libgtest.a -o $@
+	$(CXX) $^ $(LDFLAGS) $(DEPLIBDIR)/libgtest.a -o $@
 
 %.o:%.cpp
-	$(CC) $< -c -o $@ $(CXXFLAGS)
+	$(CXX) $< -c -o $@ $(CXXFLAGS) -std=c++11
 
 .PHONY : clean
 

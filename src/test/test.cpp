@@ -86,15 +86,12 @@ static void test_help(ARGS &args)
 
 static void test_detect(ARGS &args)
 {
-    char tmpPath[32];
     int n = 1;
     if (args.size() > 1)
         n = atoi(args[1].c_str());
 
     for (int i=0; i<n; i++) {
         MsgDetectReq *req = new MsgDetectReq;
-        sprintf(tmpPath, "/detect/%d.jpg", n);
-        req->imgFile = tmpPath;
         MODULE_ALG->Push(req);
     }
 
@@ -105,15 +102,9 @@ static void test_add(ARGS &args)
     if (args.size() != 3)
         return;
 
-    int n = atoi(args[2].c_str());
-    char tmpPath[32];
+    //int n = atoi(args[2].c_str());
 
-    MsgAddImgReq *req = new MsgAddImgReq;
-    req->tagName = args[1];
-    for (int i=0; i<n; i++) {
-        sprintf(tmpPath, "/extract/%s_%i.jpg", args[1].c_str(), i);
-        req->imgFiles.push_back(tmpPath);
-    }
+    MsgCheckinReq *req = new MsgCheckinReq;
     MODULE_ALG->Push(req);
 }
 
@@ -140,8 +131,5 @@ static void test_search(ARGS &args)
         return;
 
     MsgSearchReq *req = new MsgSearchReq;
-    req->imgFile = args[1];
-    req->tagNames.push_back(args[2]);
-
     MODULE_ALG->Push(req);
 }

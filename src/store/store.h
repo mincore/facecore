@@ -13,13 +13,13 @@
 #include <memory>
 #include <unordered_map>
 #include <list>
-#include "../msg/pb/core.pb.h"
+#include "../msg/pb/fastore.pb.h"
 #include "../alg/alg.h"
 
 namespace leveldb {
     class DB;
 }
-using namespace core;
+using namespace fastore;
 
 typedef std::uint64_t FaceID;
 typedef std::uint32_t TagID;

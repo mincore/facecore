@@ -11,67 +11,32 @@
 #include "module/module.h"
 #include "alg/alg.h"
 #include "store/store.h"
+#include "pb/faapi.pb.h"
 #include <vector>
 #include <string>
 
-struct Msg: public Task {
-    int sess;
+struct MsgDetectReq: public Task, public faapi::DetectReq {
+    virtual void Run();
 };
 
-struct MsgDetectReq: public Msg {
-    void Run();
-
-    std::string imgFile;
+struct MsgDetectResp: public Task, public faapi::DetectResp {
+    virtual void Run();
 };
 
-struct MsgDetectResp: public Msg {
-    void Run();
-
-    struct result {
-        int x,y,w,h;
-    };
-    std::vector<result> results;
+struct MsgCheckinReq: public Task, public faapi::CheckinReq {
+    virtual void Run();
 };
 
-struct MsgSearchReq: public Msg {
-    void Run();
-
-    std::string imgFile;
-    std::vector<std::string> tagNames;
+struct MsgCheckinResp: public Task, public faapi::CheckinResp {
+    virtual void Run();
 };
 
-struct MsgSearchResp: public Msg {
-    void Run();
-
-    struct result {
-        FaceID matchFaceID;
-        float score;
-        std::string tagName;
-    };
-    std::vector<result> results;
+struct MsgSearchReq: public Task, public faapi::SearchReq {
+    virtual void Run();
 };
 
-struct MsgAddImgReq: public Msg {
-    void Run();
-
-    std::vector<std::string> imgFiles;
-    std::string tagName;
-};
-
-struct MsgAddImgResp: public Msg {
-    void Run();
-
-    int validImgs;
-};
-
-struct MsgListTagsReq: public Msg {
-    void Run();
-};
-
-struct MsgListTagsResp: public Msg {
-    void Run();
-
-    std::vector<std::string> tagNames;
+struct MsgSearchResp: public Task, public faapi::SearchResp {
+    virtual void Run();
 };
 
 #endif
