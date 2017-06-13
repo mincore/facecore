@@ -61,11 +61,3 @@ public:
         Store::Instance()->AddFaces(m_tagName, results);
     }
 };
-
-void MsgDetectReq::Run()
-{
-}
-
-void MsgCheckinReq::Run()
-{
-}

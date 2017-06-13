@@ -12,8 +12,6 @@
 #include "alg/alg.h"
 #include "store/store.h"
 #include "pb/faapi.pb.h"
-#include <vector>
-#include <string>
 
 struct MsgDetectReq: public Task, public faapi::DetectReq {
     virtual void Run();

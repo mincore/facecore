@@ -9,6 +9,7 @@
 #include "common/common.h"
 #include "module/module.h"
 #include "server.h"
+#include "msg/msg.h"
 
 static bool Init()
 {
@@ -22,3 +23,33 @@ static bool Exit()
 
 MODULE(GATE, Init, Exit);
 
+
+void MsgDetectReq::Run()
+{
+
+}
+
+void MsgDetectResp::Run()
+{
+
+}
+
+void MsgCheckinReq::Run()
+{
+
+}
+
+void MsgCheckinResp::Run()
+{
+
+}
+
+void MsgSearchReq::Run()
+{
+
+}
+
+void MsgSearchResp::Run()
+{
+
+}

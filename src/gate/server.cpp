@@ -65,7 +65,7 @@ int ServerStart()
     DisableSignalPipe();
 
     gss = ss;
-    int sid = socket_server_listen(ss, 200, "127.0.0.1", 8888, 32);
+    int sid = socket_server_listen(ss, 0, "0.0.0.0", 8888, 32);
     if (sid < 0) {
         LOG_ERROR("listen failed");
         return -1;

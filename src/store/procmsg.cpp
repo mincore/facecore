@@ -23,7 +23,3 @@ static bool Exit()
 }
 
 MODULE(STORE, Init, Exit);
-
-void MsgSearchReq::Run()
-{
-}
