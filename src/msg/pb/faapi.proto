@@ -26,11 +26,13 @@ message DetectResp {
 message CheckinReq {
     optional uint32 id = 1;
     optional ImgBuf imgBuf = 2;
+    optional string tagName = 3;
 }
 
 message CheckinResp {
     optional uint32 id = 1;
     repeated uint32 faceID = 2;
+    optional string tagName = 3;
 }
 
 message SearchReq {
@@ -40,12 +42,25 @@ message SearchReq {
 }
 
 message SearchResult {
+    optional uint32 id = 1;
     optional uint32 faceID = 1;
-    optional double score = 2;
-    optional string tagName = 3;
+    optional Rect rect = 2;
+    optional double score = 3;
+    optional string tagName = 4;
 }
 
 message SearchResp {
     optional uint32 id = 1;
     repeated SearchResult results = 2;
+}
+
+message CompareTwoImgReq {
+    optional uint32 id = 1;
+    optional ImgBuf imgBuf1 = 2;
+    optional ImgBuf imgBuf2 = 3;
+}
+
+message CompareTwoImgResp {
+    optional uint32 id = 1;
+    optional double score = 2;
 }
